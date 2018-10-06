@@ -9,14 +9,14 @@ window.onload = () => {
 }
 
 $(document).ready(function(){
-    $("#console").append(`Console@${window.location.hostname}`);
+    $("#console").prepend(`Console@${window.location.hostname}`);
     $("#request").on("click", () => {
         if("Notification" in window){
             Notification.requestPermission(stat => {
-                $("#console").append(`<p>${stat}</p>`);
+                $("#console").prepend(`<p>${stat}</p>`);
             })
         } else {
-            $("#console").append("<p>Push API is not supported!</p>")
+            $("#console").prepend("<p>Push API is not supported!</p>")
         }
     });
     $("#show").on("click", () => {
@@ -30,14 +30,14 @@ $(document).ready(function(){
                             image: "img/saltyAI.png"
                         }
                         sw.showNotification("Message from AI Chan", options);
-                        $("#console").append("<p>Show notification</p>");
+                        $("#console").prepend("<p>Show notification</p>");
                     })
                 } else {
-                    $("#console").append("<p>Permission isn't granted</p>")
+                    $("#console").prepend("<p>Permission isn't granted</p>")
                 }
             })
         } else {
-            $("#console").append("<p>Push API is not supported!</p>")
+            $("#console").prepend("<p>Push API is not supported!</p>")
         }
     });
 })
