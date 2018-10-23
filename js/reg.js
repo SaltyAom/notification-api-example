@@ -1,11 +1,9 @@
-window.onload = () => {
-    if('serviceWorker' in navigator){
-        navigator.serviceWorker.register("sw.js").then(reg => {
-            console.log(`Registration:`, reg);
-        }).catch(err => {
-            console.warn(`Registration:`, err);
-        })
-    }   
+if('serviceWorker' in navigator){
+    navigator.serviceWorker.register("sw.js").then(reg => {
+        console.log(`Registration:`, reg);
+    }).catch(err => {
+        console.warn(`Registration:`, err);
+    })
 }   
 
 const prepend = msg => {
