@@ -5,45 +5,55 @@ window.onload = () => {
         }).catch(err => {
             console.warn(`Registration:`, err);
         })
-    }
+    }   
+}   
+
+const prepend = msg => {
+    let initElement = document.createElement("div"),
+        initContent = document.createTextNode(`${msg}`),
+        consoleNode = document.getElementById("console");
+    initElement.appendChild(initContent);
+
+    consoleNode.insertBefore(initElement, consoleNode.childNodes[0]);    
 }
 
-$(document).ready(function(){
-    $("#console").prepend(`Console@${window.location.hostname}`);
-    $("#request").on("click", () => {
+window.onload = () => {    
+    prepend(`console@${window.location.hostname}`);
+
+    document.getElementById("request").onclick = () => {
         if("Notification" in window){
             Notification.requestPermission(stat => {
-                $("#console").prepend(`<p>${stat}</p>`);
+                prepend(stat);
             })
         } else {
-            $("#console").prepend("<p>Push API is not supported!</p>")
+            prepend("Notification API is not supported in your browser!");
         }
-    });
-    $("#show").on("click", () => {
+    }
+
+    document.getElementById("show").onclick = () => {
         if("Notification" in window){
             Notification.requestPermission(stat => {
                 if(stat === "granted"){
                     navigator.serviceWorker.getRegistration().then(sw => {
                         let options = {
-                            body: "Do you want some salt, captain?",
-                            icon: "img/ai-chan.png",
-                            image: "img/saltyAI.png"
+                            body: "Let's buy some Nendoroid!",
+                            icon: "img/Sukusuku Hakutaku.png",
                         }
-                        sw.showNotification("Message from AI Chan", options);
-                        $("#console").prepend("<p>Show notification</p>");
+                        sw.showNotification("I want to buy a Nendoroid!", options);
+                        prepend("Show Notification");
                     })
                 } else {
-                    $("#console").prepend("<p>Permission isn't granted</p>")
+                    prepend("Notification isn't granted");
                 }
             })
         } else {
-            $("#console").prepend("<p>Push API is not supported!</p>")
+            prepend("Notification API is not supported in your browser!");
         }
-    });
-})
-
+    }
+}
+     
 /* Valid Options
-{
+{    
     "//": "Visual Options",
     "body": "<String>",
     "icon": "<URL String>",
@@ -52,18 +62,19 @@ $(document).ready(function(){
     "vibrate": "<Array of Integers>",
     "sound": "<URL String>",
     "dir": "<String of 'auto' | 'ltr' | 'rtl'>",
-
+    
     "//": "Behavioural Options",
     "tag": "<String>",
     "data": "<Anything>",
     "requireInteraction": "<boolean>",
     "renotify": "<Boolean>",
     "silent": "<Boolean>",
-
+    
     "//": "Both Visual & Behavioural Options",
     "actions": "<Array of Strings>",
-
+    
     "//": "Information Option. No visual affect.",
     "timestamp": "<Long>"
-}
-*/
+}   
+*/  
+    
