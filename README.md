@@ -1,2 +1,2 @@
-# push-api-example
-### An example of using push API in JavaScri[t, simple.
+# notification-api-example
+### An example of using Web Notification on web, simple.
